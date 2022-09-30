@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import recentlyPlayed from '../../assets/mockdata/recentlyPlayed.json';
 import heavyRotation from '../../assets/mockdata/heavyRotation.json';
@@ -35,7 +36,13 @@ export class Tab1Page {
     freeMode: true,
   }
 
-  constructor() {}
+  constructor(private router: Router) {}
+
+  openAlbum(album) {
+    const titleEscaped = encodeURIComponent(album.title);
+    console.log('titleEscaped: ', titleEscaped);
+    this.router.navigateByUrl(`/tabs/tab1/${titleEscaped}`);
+  }
 
   dasherize(string) {
     return string.replace(/[A-Z]/g, function(char, index) {
